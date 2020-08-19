@@ -1,7 +1,7 @@
 package com.luizfoli.apiestantevirtual.controllers;
 
-import com.luizfoli.apiestantevirtual.models.Book;
-import com.luizfoli.apiestantevirtual.services.BookService;
+import com.luizfoli.apiestantevirtual.models.Livro;
+import com.luizfoli.apiestantevirtual.services.LivroService;
 import com.luizfoli.apiestantevirtual.utils.RequestMaker;
 
 import org.json.JSONObject;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/book")
-public class BooksController {
+@RequestMapping("/livro")
+public class LivroController {
 
     private RequestMaker requestMaker = new RequestMaker();
-    private BookService bookService = new BookService();
+    private LivroService bookService = new LivroService();
 
     @GetMapping
-    public Book get(@RequestParam String name) {
+    public Livro get(@RequestParam String name) {
         System.out.println(name);
         name = name.replaceAll(" ", "+");
         System.out.println(name);
-        System.out.println("https://www.googleapis.com/books/v1/volumes?q=" + name);
+        System.out.println("https://www.googleapis.com/books/v1/volumes?q=" + name + "&startIndex=0&maxResults=1&printType=books");
         JSONObject retorno = requestMaker.get("https://www.googleapis.com/books/v1/volumes?q=" + name);
-        Book book = bookService.convertJsonToBook(retorno);
+        Livro book = bookService.convertJsonToBook(retorno);
         return book;
     }
 }
