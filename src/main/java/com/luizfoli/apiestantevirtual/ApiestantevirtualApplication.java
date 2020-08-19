@@ -1,4 +1,4 @@
-package com.luizfoli.apiestantevirtual.apiestantevirtual;
+package com.luizfoli.apiestantevirtual;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
