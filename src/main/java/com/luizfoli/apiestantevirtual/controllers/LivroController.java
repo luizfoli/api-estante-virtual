@@ -19,10 +19,7 @@ public class LivroController {
 
     @GetMapping
     public Livro get(@RequestParam String name) {
-        System.out.println(name);
         name = name.replaceAll(" ", "+");
-        System.out.println(name);
-        System.out.println("https://www.googleapis.com/books/v1/volumes?q=" + name + "&startIndex=0&maxResults=1&printType=books");
         JSONObject retorno = requestMaker.get("https://www.googleapis.com/books/v1/volumes?q=" + name);
         Livro book = bookService.convertJsonToBook(retorno);
         return book;
