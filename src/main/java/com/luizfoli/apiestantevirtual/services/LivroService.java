@@ -1,21 +1,53 @@
 package com.luizfoli.apiestantevirtual.services;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBookApi;
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBookApiRequester;
 import com.luizfoli.apiestantevirtual.models.Livro;
 
-import org.json.JSONObject;
-
+@Service
 public class LivroService {
 
-    public Livro convertJsonToBook(JSONObject json) {
-        Livro book = new Livro();
+    private GoogleBookApi googleBookApi;
+    private GoogleBookApiRequester googleBookApiRequester;
 
-        JSONObject volumeInfo = json.getJSONArray("items").getJSONObject(0).getJSONObject("volumeInfo");
+    public LivroService(GoogleBookApi googleBookApi, GoogleBookApiRequester googleBookApiRequester) {
+        this.googleBookApi = googleBookApi;
+        this.googleBookApiRequester = googleBookApiRequester;
+    }
 
-        book.setTitulo(volumeInfo.getString("title"));
-        book.setDescricao(volumeInfo.getString("description"));
-        book.setQtdPaginas(volumeInfo.getInt("pageCount"));
+    public List<Livro> getBook(String bookName) throws Exception {
+        return this.convertBooks(this.googleBookApiRequester.getBooks(bookName));
+    }
 
-        return book;
+    private List<Livro> convertBooks(JSONObject json) throws Exception {
+
+        if (json == null) {
+            throw new Exception("");
+        }
+
+        List<Livro> livros = new ArrayList<>();
+
+        this.googleBookApi.convertJsonToItems(json).forEach(item -> {
+            JSONObject volumeInfo = ((JSONObject) item).getJSONObject("volumeInfo");
+            livros.add(this.createBook(volumeInfo));
+        });
+
+        return livros;
+    }
+
+    private Livro createBook(JSONObject json) {
+        Livro livro = new Livro();
+        livro.setTitulo(json.has("title") ? json.getString("title") : "");
+        livro.setDescricao(json.has("description") ? json.getString("description") : "");
+        livro.setQtdPaginas(json.has("pageCount") ? json.getInt("pageCount") : 0);
+        return livro;
     }
 
 }
