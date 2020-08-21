@@ -33,7 +33,7 @@ public class GoogleBookApiRequester {
      * @since 20/08/2020
      */
 
-    public JSONObject getBooks(String bookName) {
+    public JSONObject getVolumes(String bookName) {
         return requestMaker.get(this.googleBooksApiUrl + "/volumes?printType=books&q=" + bookName);
     }
 

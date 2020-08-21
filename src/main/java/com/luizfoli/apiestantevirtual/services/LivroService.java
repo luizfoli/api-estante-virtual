@@ -23,7 +23,7 @@ public class LivroService {
     }
 
     public List<Livro> getBook(String bookName) throws Exception {
-        return this.convertBooks(this.googleBookApiRequester.getBooks(bookName));
+        return this.convertBooks(this.googleBookApiRequester.getVolumes(bookName));
     }
 
     private List<Livro> convertBooks(JSONObject json) throws Exception {
