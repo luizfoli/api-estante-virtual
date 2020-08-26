@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.luizfoli.apiestantevirtual</groupId>
 	<artifactId>apiestantevirtual</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>apiestantevirtual</name>
 	<description>Demo for my virtual books organize</description>
 	<properties>
