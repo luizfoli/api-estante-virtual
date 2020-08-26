@@ -9,16 +9,15 @@ import java.util.List;
 
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBookApi;
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBookApiRequester;
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.models.VolumeGoogleBookApi;
 import com.luizfoli.apiestantevirtual.models.Livro;
 
 @Service
 public class LivroService {
 
-    private GoogleBookApi googleBookApi;
     private GoogleBookApiRequester googleBookApiRequester;
 
-    public LivroService(GoogleBookApi googleBookApi, GoogleBookApiRequester googleBookApiRequester) {
-        this.googleBookApi = googleBookApi;
+    public LivroService(GoogleBookApiRequester googleBookApiRequester) {
         this.googleBookApiRequester = googleBookApiRequester;
     }
 
@@ -27,28 +26,22 @@ public class LivroService {
         return this.convertBooks(this.googleBookApiRequester.getVolumes(bookName));
     }
 
-    private List<Livro> convertBooks(JSONObject json) throws Exception {
-
-        if (json == null) {
-            throw new Exception("");
-        }
-
+    private List<Livro> convertBooks(List<VolumeGoogleBookApi> volumes) throws Exception {
         List<Livro> livros = new ArrayList<>();
+        volumes.forEach(volume -> {
+            Livro livro = new Livro();
+            // livro.getAutor(volume.get)
+            livro.setDescricao(volume.getDescription());
+            livro.setDataPublicacao(volume.getPublishedDate());
+            livro.setId(volume.getId());
+            livro.setPublicador(volume.getPublisher());
+            livro.setQtdPaginas(volume.getPageCount());
+            livro.setTitulo(volume.getTitle());
+            livro.setAvaliacaoMedia(volume.getAverageRating());
+            livro.setAvaliacao(volume.getRatingCount());
 
-        this.googleBookApi.convertJsonToItems(json).forEach(item -> {
-            JSONObject volumeInfo = ((JSONObject) item).getJSONObject("volumeInfo");
-            livros.add(this.createBook(volumeInfo));
+            livros.add(livro);
         });
-
         return livros;
     }
-
-    private Livro createBook(JSONObject json) {
-        Livro livro = new Livro();
-        livro.setTitulo(json.has("title") ? json.getString("title") : "");
-        livro.setDescricao(json.has("description") ? json.getString("description") : "");
-        livro.setQtdPaginas(json.has("pageCount") ? json.getInt("pageCount") : 0);
-        return livro;
-    }
-
 }
