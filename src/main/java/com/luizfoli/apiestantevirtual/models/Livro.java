@@ -11,6 +11,7 @@ public class Livro {
     private int qtdPaginas;
     private int avaliacaoMedia;
     private int avaliacao;
+    private String linkImagem;
 
     public String getId() {
         return id;
@@ -83,4 +84,13 @@ public class Livro {
     public void setAvaliacao(int avaliacao) {
         this.avaliacao = avaliacao;
     }
+
+    public String getLinkImagem() {
+        return linkImagem;
+    }
+
+    public void setLinkImagem(String linkImagem) {
+        this.linkImagem = linkImagem;
+    }
+
 }

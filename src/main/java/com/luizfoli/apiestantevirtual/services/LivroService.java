@@ -39,6 +39,7 @@ public class LivroService {
             livro.setTitulo(volume.getTitle());
             livro.setAvaliacaoMedia(volume.getAverageRating());
             livro.setAvaliacao(volume.getRatingCount());
+            livro.setLinkImagem(volume.getImageLink());
 
             livros.add(livro);
         });
