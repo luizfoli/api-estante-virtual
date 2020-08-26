@@ -23,6 +23,7 @@ public class LivroService {
     }
 
     public List<Livro> getBook(String bookName) throws Exception {
+        bookName = bookName.replaceAll(" ", "+");
         return this.convertBooks(this.googleBookApiRequester.getVolumes(bookName));
     }
 

@@ -21,7 +21,6 @@ public class LivroController {
 
     @GetMapping
     public List<Livro> get(@RequestParam String name) throws Exception {
-        name = name.replaceAll(" ", "+");
         return this.repository.find(name);
     }
 }
