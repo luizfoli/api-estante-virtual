@@ -9,6 +9,8 @@ public class Livro {
     private String dataPublicacao;
     private String descricao;
     private int qtdPaginas;
+    private int avaliacaoMedia;
+    private int avaliacao;
 
     public String getId() {
         return id;
@@ -64,5 +66,21 @@ public class Livro {
 
     public void setQtdPaginas(int qtdPaginas) {
         this.qtdPaginas = qtdPaginas;
+    }
+
+    public int getAvaliacaoMedia() {
+        return avaliacaoMedia;
+    }
+
+    public void setAvaliacaoMedia(int avaliacaoMedia) {
+        this.avaliacaoMedia = avaliacaoMedia;
+    }
+
+    public int getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(int avaliacao) {
+        this.avaliacao = avaliacao;
     }
 }
