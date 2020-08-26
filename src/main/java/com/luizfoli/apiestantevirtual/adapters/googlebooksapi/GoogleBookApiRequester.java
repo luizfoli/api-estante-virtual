@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.models.VolumeGoogleBookApi;
 import com.luizfoli.apiestantevirtual.utils.RequestMaker;
 
 /**
@@ -18,10 +22,13 @@ public class GoogleBookApiRequester {
 
     @Value("${google_books_api_url}")
     private String googleBooksApiUrl;
+
+    private GoogleBookApi googleBookApi;
     private RequestMaker requestMaker;
 
-    public GoogleBookApiRequester(RequestMaker requestMaker) {
+    public GoogleBookApiRequester(GoogleBookApi googleBookApi, RequestMaker requestMaker) {
         this.requestMaker = requestMaker;
+        this.googleBookApi = googleBookApi;
     }
 
     /**
@@ -33,8 +40,17 @@ public class GoogleBookApiRequester {
      * @since 20/08/2020
      */
 
-    public JSONObject getVolumes(String bookName) {
-        return requestMaker.get(this.googleBooksApiUrl + "/volumes?printType=books&q=" + bookName);
+    public List<VolumeGoogleBookApi> getVolumes(String bookName) {
+        JSONObject response = requestMaker.get(this.googleBooksApiUrl + "/volumes?printType=books&q=" + bookName);
+
+        if (response == null) {
+            System.out.println("Problemas com a API do Google");
+        } else if (response.getInt("totalItems") == 0) {
+            System.out.println("Não obteve resultado da Google Books API");
+            return new ArrayList<>();
+        }
+
+        return this.googleBookApi.convertJsonToVolumes(response);
     }
 
 }
