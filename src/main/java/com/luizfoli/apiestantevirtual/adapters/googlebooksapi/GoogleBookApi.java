@@ -32,7 +32,6 @@ public class GoogleBookApi {
 
                 if (((JSONObject) item).has("volumeInfo")) {
                     JSONObject volumeInfo = jsonUtil.getObjectIfHas(((JSONObject) item), "volumeInfo");
-
                     volume.setTitle(jsonUtil.getStringIfHas(volumeInfo, "title"));
                     volume.setPublisher(jsonUtil.getStringIfHas(volumeInfo, "publisher"));
                     volume.setPublishedDate(jsonUtil.getStringIfHas(volumeInfo, "publishedDate"));
@@ -40,7 +39,9 @@ public class GoogleBookApi {
                     volume.setPageCount(jsonUtil.getIntIfHas(volumeInfo, "pageCount"));
                     volume.setAverageRating(jsonUtil.getIntIfHas(volumeInfo, "averageRating"));
                     volume.setRatingsCount(jsonUtil.getIntIfHas(volumeInfo, "ratingsCount"));
-                    volume.setImageLink(jsonUtil.getStringIfHas(volumeInfo, "imageLink"));
+
+                    JSONObject imageLinks = jsonUtil.getObjectIfHas(volumeInfo, "imageLinks");
+                    volume.setImageLink(jsonUtil.getStringIfHas(imageLinks, "thumbnail"));
                 }
 
                 volumes.add(volume);
