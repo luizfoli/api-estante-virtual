@@ -38,7 +38,7 @@ public class LivroService {
             livro.setQtdPaginas(volume.getPageCount());
             livro.setTitulo(volume.getTitle());
             livro.setAvaliacaoMedia(volume.getAverageRating());
-            livro.setAvaliacao(volume.getRatingCount());
+            livro.setAvaliacao(volume.getRatingsCount());
             livro.setLinkImagem(volume.getImageLink());
 
             livros.add(livro);

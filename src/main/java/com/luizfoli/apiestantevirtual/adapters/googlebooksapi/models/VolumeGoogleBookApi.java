@@ -10,7 +10,7 @@ public class VolumeGoogleBookApi {
     private String description;
     private int pageCount;
     private int averageRating;
-    private int ratingCount;
+    private int ratingsCount;
     private String imageLink;
 
     /**
@@ -128,15 +128,15 @@ public class VolumeGoogleBookApi {
     /**
      * @return the ratingCount
      */
-    public int getRatingCount() {
-        return ratingCount;
+    public int getRatingsCount() {
+        return ratingsCount;
     }
 
     /**
      * @param ratingCount the ratingCount to set
      */
-    public void setRatingCount(int ratingCount) {
-        this.ratingCount = ratingCount;
+    public void setRatingsCount(int ratingsCount) {
+        this.ratingsCount = ratingsCount;
     }
 
     /**

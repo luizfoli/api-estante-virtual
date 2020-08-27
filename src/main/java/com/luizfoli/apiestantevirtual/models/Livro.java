@@ -1,17 +1,23 @@
 package com.luizfoli.apiestantevirtual.models;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 public class Livro {
+
 
     private String id;
     private String titulo;
     private String autor;
     private String publicador;
-    private String dataPublicacao;
     private String descricao;
-    private int qtdPaginas;
-    private int avaliacaoMedia;
     private int avaliacao;
-    private String linkImagem;
+    @JsonProperty("data_publicacao") private String dataPublicacao;
+    @JsonProperty("qtd_paginas") private int qtdPaginas;
+    @JsonProperty("avalicao_media") private int avaliacaoMedia;
+    @JsonProperty("link_image") private String linkImagem;
 
     public String getId() {
         return id;

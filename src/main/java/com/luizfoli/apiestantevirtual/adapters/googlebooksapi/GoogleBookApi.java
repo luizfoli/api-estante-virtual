@@ -39,7 +39,7 @@ public class GoogleBookApi {
                     volume.setDescription(jsonUtil.getStringIfHas(volumeInfo, "description"));
                     volume.setPageCount(jsonUtil.getIntIfHas(volumeInfo, "pageCount"));
                     volume.setAverageRating(jsonUtil.getIntIfHas(volumeInfo, "averageRating"));
-                    volume.setRatingCount(jsonUtil.getIntIfHas(volumeInfo, "ratingCount"));
+                    volume.setRatingsCount(jsonUtil.getIntIfHas(volumeInfo, "ratingsCount"));
                     volume.setImageLink(jsonUtil.getStringIfHas(volumeInfo, "imageLink"));
                 }
 
