@@ -1,4 +1,4 @@
-package com.luizfoli.apiestantevirtual.services;
+package com.luizfoli.apiestantevirtual.service;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,8 +9,8 @@ import java.util.List;
 
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBookApi;
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBookApiRequester;
-import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.models.VolumeGoogleBookApi;
-import com.luizfoli.apiestantevirtual.models.Livro;
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.model.VolumeGoogleBookApi;
+import com.luizfoli.apiestantevirtual.model.Livro;
 
 @Service
 public class LivroService {

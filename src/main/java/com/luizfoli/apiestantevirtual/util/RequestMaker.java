@@ -1,4 +1,4 @@
-package com.luizfoli.apiestantevirtual.utils;
+package com.luizfoli.apiestantevirtual.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -1,9 +1,9 @@
-package com.luizfoli.apiestantevirtual.repositories;
+package com.luizfoli.apiestantevirtual.repository;
 
 import java.util.List;
 
-import com.luizfoli.apiestantevirtual.models.Livro;
-import com.luizfoli.apiestantevirtual.services.LivroService;
+import com.luizfoli.apiestantevirtual.model.Livro;
+import com.luizfoli.apiestantevirtual.service.LivroService;
 
 import org.springframework.stereotype.Repository;
 

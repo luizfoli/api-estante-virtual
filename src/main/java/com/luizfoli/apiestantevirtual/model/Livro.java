@@ -1,4 +1,4 @@
-package com.luizfoli.apiestantevirtual.models;
+package com.luizfoli.apiestantevirtual.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;

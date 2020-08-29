@@ -1,4 +1,4 @@
-package com.luizfoli.apiestantevirtual.adapters.googlebooksapi.models;
+package com.luizfoli.apiestantevirtual.adapters.googlebooksapi.model;
 
 public class VolumeGoogleBookApi {
 

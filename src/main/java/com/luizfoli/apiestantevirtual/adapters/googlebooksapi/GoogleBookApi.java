@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.models.VolumeGoogleBookApi;
-import com.luizfoli.apiestantevirtual.utils.JsonUtil;
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.model.VolumeGoogleBookApi;
+import com.luizfoli.apiestantevirtual.util.JsonUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

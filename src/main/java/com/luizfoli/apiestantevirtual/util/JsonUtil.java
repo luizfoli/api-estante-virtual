@@ -1,4 +1,4 @@
-package com.luizfoli.apiestantevirtual.utils;
+package com.luizfoli.apiestantevirtual.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

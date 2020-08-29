@@ -7,8 +7,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.models.VolumeGoogleBookApi;
-import com.luizfoli.apiestantevirtual.utils.RequestMaker;
+import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.model.VolumeGoogleBookApi;
+import com.luizfoli.apiestantevirtual.util.RequestMaker;
 
 /**
  * Adapter class for make requests to Google Books API

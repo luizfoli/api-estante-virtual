@@ -1,9 +1,10 @@
-package com.luizfoli.apiestantevirtual.controllers;
+package com.luizfoli.apiestantevirtual.controller;
 
 import java.util.List;
 
-import com.luizfoli.apiestantevirtual.models.Livro;
-import com.luizfoli.apiestantevirtual.repositories.LivroRepository;
+import com.luizfoli.apiestantevirtual.model.Livro;
+import com.luizfoli.apiestantevirtual.repository.LivroRepository;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
