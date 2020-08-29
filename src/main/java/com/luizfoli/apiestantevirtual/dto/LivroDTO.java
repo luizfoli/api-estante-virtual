@@ -1,13 +1,9 @@
-package com.luizfoli.apiestantevirtual.model;
+package com.luizfoli.apiestantevirtual.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-public class Livro {
-
-
+public class LivroDTO {
+	
     private String id;
     private String titulo;
     private String autor;

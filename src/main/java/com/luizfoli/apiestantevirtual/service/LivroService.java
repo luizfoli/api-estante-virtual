@@ -1,7 +1,5 @@
 package com.luizfoli.apiestantevirtual.service;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +7,7 @@ import java.util.List;
 
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBooksApi;
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.dto.VolumeGoogleBooksApiDTO;
-import com.luizfoli.apiestantevirtual.model.Livro;
+import com.luizfoli.apiestantevirtual.dto.LivroDTO;
 
 @Service
 public class LivroService {
@@ -20,28 +18,32 @@ public class LivroService {
         this.googleBookApiRequester = googleBookApiRequester;
     }
 
-    public List<Livro> getBook(String bookName) throws Exception {
+    public List<LivroDTO> getBook(String bookName) throws Exception {
         bookName = bookName.replaceAll(" ", "+");
-        //return this.convertBooks(this.googleBookApiRequester.getVolumes(bookName));
-        VolumeGoogleBooksApiDTO dto = this.googleBookApiRequester.getVolumes(bookName);
-        return null;
+        return this.convertBooks(this.googleBookApiRequester.getVolumes(bookName));
     }
 
-    private List<Livro> convertBooks(List<VolumeGoogleBooksApiDTO> volumes) throws Exception {
-		/*
-		 * List<Livro> livros = new ArrayList<>(); volumes.forEach(volume -> { Livro
-		 * livro = new Livro(); // livro.getAutor(volume.get)
-		 * livro.setDescricao(volume.getDescription());
-		 * livro.setDataPublicacao(volume.getPublishedDate());
-		 * livro.setId(volume.getId()); livro.setPublicador(volume.getPublisher());
-		 * livro.setQtdPaginas(volume.getPageCount());
-		 * livro.setTitulo(volume.getTitle());
-		 * livro.setAvaliacaoMedia(volume.getAverageRating());
-		 * livro.setAvaliacao(volume.getRatingsCount());
-		 * livro.setLinkImagem(volume.getImageLink());
-		 * 
-		 * livros.add(livro); }); return livros;
-		 */
-    	return null;
+    private List<LivroDTO> convertBooks(VolumeGoogleBooksApiDTO dto) {
+    	
+    	List<LivroDTO> books = new ArrayList<>();
+    	dto.getItems().forEach(item -> {
+    		LivroDTO book = new LivroDTO();
+    		book.setId(item.getId()); 
+    		book.setDescricao(item.getVolumeInfo().getDescription());
+    		book.setDataPublicacao(item.getVolumeInfo().getPublishedDate());
+    		book.setPublicador(item.getVolumeInfo().getPublisher());
+    		book.setQtdPaginas(item.getVolumeInfo().getPageCount());
+    		book.setTitulo(item.getVolumeInfo().getTitle());
+    		book.setAvaliacaoMedia(item.getVolumeInfo().getAverageRating());
+    		book.setAvaliacao(item.getVolumeInfo().getRatingsCount());
+    		
+    		if(item.getVolumeInfo().getImageLinks() != null) {
+    			book.setLinkImagem(item.getVolumeInfo().getImageLinks().getThumbnail());    			
+    		}
+    		
+    		books.add(book);
+    	});
+    	
+    	return books;
     }
 }

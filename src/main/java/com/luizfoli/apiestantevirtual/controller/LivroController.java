@@ -2,7 +2,7 @@ package com.luizfoli.apiestantevirtual.controller;
 
 import java.util.List;
 
-import com.luizfoli.apiestantevirtual.model.Livro;
+import com.luizfoli.apiestantevirtual.dto.LivroDTO;
 import com.luizfoli.apiestantevirtual.repository.LivroRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class LivroController {
     }
 
     @GetMapping
-    public List<Livro> get(@RequestParam String name) throws Exception {
+    public List<LivroDTO> get(@RequestParam String name) throws Exception {
         return this.repository.find(name);
     }
 }
