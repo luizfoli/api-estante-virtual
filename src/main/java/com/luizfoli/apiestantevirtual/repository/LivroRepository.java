@@ -2,21 +2,15 @@ package com.luizfoli.apiestantevirtual.repository;
 
 import java.util.List;
 
-import com.luizfoli.apiestantevirtual.dto.LivroDTO;
-import com.luizfoli.apiestantevirtual.service.LivroService;
-
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.luizfoli.apiestantevirtual.enums.LeituraStatus;
+import com.luizfoli.apiestantevirtual.model.Livro;
+
 @Repository
-public class LivroRepository {
-
-    private LivroService livroService;
-
-    public LivroRepository(LivroService livroService) {
-        this.livroService = livroService;
-    }
-
-    public List<LivroDTO> find(String bookName) throws Exception {
-        return this.livroService.getBook(bookName);
-    }
+public interface LivroRepository extends CrudRepository<Livro, Long> {
+	
+	List<Livro> findByLeituraStatus(LeituraStatus leituraStatus);
+	
 };
