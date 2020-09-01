@@ -45,6 +45,13 @@ public class LivroService {
 			case 2: livro.setLeituraStatus(LeituraStatus.QUERO_LER);
 			case 3: livro.setLeituraStatus(LeituraStatus.LIDO);
 		}
+
+		Livro livroAlreadySaved = this.repository.findByGoogleBooksApiId(dto.getGoogleBooksApiId());
+		if(livroAlreadySaved != null) {
+			System.out.println("Livro com o id={" + dto.getGoogleBooksApiId() + "} da Books API já foi adicionado");
+			return false;
+		}
+
     	Livro livroSaved =  this.repository.save(livro);
     	return (livroSaved != null);
 	}
