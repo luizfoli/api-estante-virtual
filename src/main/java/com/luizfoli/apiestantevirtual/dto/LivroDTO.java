@@ -1,9 +1,11 @@
 package com.luizfoli.apiestantevirtual.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LivroDTO {
 
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT) private Long id;
     private int leituraStatus;
     private String googleBooksApiId;
     private String titulo;
@@ -15,6 +17,14 @@ public class LivroDTO {
     @JsonProperty("qtd_paginas") private int qtdPaginas;
     @JsonProperty("avalicao_media") private int avaliacaoMedia;
     @JsonProperty("link_image") private String linkImagem;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getLeituraStatus(){
         return leituraStatus;
