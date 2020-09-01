@@ -1,5 +1,6 @@
 package com.luizfoli.apiestantevirtual.service;
 
+import com.luizfoli.apiestantevirtual.dto.StatusLeituraDTO;
 import com.luizfoli.apiestantevirtual.enums.LeituraStatus;
 import com.luizfoli.apiestantevirtual.model.Livro;
 import com.luizfoli.apiestantevirtual.repository.LivroRepository;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.GoogleBooksApi;
 import com.luizfoli.apiestantevirtual.adapters.googlebooksapi.dto.VolumeGoogleBooksApiDTO;
@@ -40,11 +42,7 @@ public class LivroService {
 		livro.setPublicador(dto.getPublicador());
 		livro.setQtdPaginas(dto.getQtdPaginas());
 		livro.setTitulo(dto.getTitulo());
-		switch (dto.getLeituraStatus()) {
-			case 1: livro.setLeituraStatus(LeituraStatus.LENDO);
-			case 2: livro.setLeituraStatus(LeituraStatus.QUERO_LER);
-			case 3: livro.setLeituraStatus(LeituraStatus.LIDO);
-		}
+		livro.setLeituraStatus(readStatusByInt(dto.getLeituraStatus()));
 
 		Livro livroAlreadySaved = this.repository.findByGoogleBooksApiId(dto.getGoogleBooksApiId());
 		if(livroAlreadySaved != null) {
@@ -78,6 +76,30 @@ public class LivroService {
 		});
 
 		return books;
+	}
+
+	public Boolean putStatusLeitura(StatusLeituraDTO dto) {
+    	Optional<Livro> livroIsAdded = this.repository.findById(dto.getIdLivro());
+
+    	if(livroIsAdded.isEmpty()) {
+			System.out.println("/status-leitura - Livro com id={" + dto.getIdLivro() + "} não encontrado");
+			return false;
+		}
+
+		Livro livro = livroIsAdded.get();
+		livro.setLeituraStatus(this.readStatusByInt(dto.getStatusLeitura()));
+		repository.save(livro);
+		return true;
+	}
+
+	private LeituraStatus readStatusByInt(int leituraStatus) {
+		switch (leituraStatus) {
+			case 0: return LeituraStatus.QUERO_LER;
+			case 1: return LeituraStatus.LENDO;
+			case 2: return LeituraStatus.LIDO;
+		}
+
+		return null;
 	}
 
 }

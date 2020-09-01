@@ -3,6 +3,7 @@ package com.luizfoli.apiestantevirtual.controller;
 import java.util.List;
 
 import com.luizfoli.apiestantevirtual.dto.LivroDTO;
+import com.luizfoli.apiestantevirtual.dto.StatusLeituraDTO;
 import com.luizfoli.apiestantevirtual.enums.LeituraStatus;
 import com.luizfoli.apiestantevirtual.repository.LivroRepository;
 import com.luizfoli.apiestantevirtual.service.LivroService;
@@ -27,5 +28,10 @@ public class LivroController {
     @PostMapping
     public Boolean post(@RequestBody LivroDTO livro) {
         return this.service.postBook(livro);
+    }
+
+    @PutMapping("/status-leitura")
+    public Boolean putStatusLeitura(@RequestBody StatusLeituraDTO dto) {
+        return this.service.putStatusLeitura(dto);
     }
 }
