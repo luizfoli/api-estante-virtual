@@ -25,12 +25,18 @@ public class LivroController {
         return this.service.getBook(name);
     }
 
+    @GetMapping("/leitura-status")
+    public List<LivroDTO> getLeituraStatus(@RequestParam int leituraStatus) {
+        return this.service.getBooksByLeituraStatus(leituraStatus);
+    }
+
+
     @PostMapping
     public Boolean post(@RequestBody LivroDTO livro) {
         return this.service.postBook(livro);
     }
 
-    @PutMapping("/status-leitura")
+    @PutMapping("/leitura-status")
     public Boolean putStatusLeitura(@RequestBody StatusLeituraDTO dto) {
         return this.service.putStatusLeitura(dto);
     }

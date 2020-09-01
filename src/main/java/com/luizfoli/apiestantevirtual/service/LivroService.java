@@ -30,6 +30,26 @@ public class LivroService {
         return this.convertVolumeToBooks(this.googleBookApiRequester.getVolumes(bookName));
     }
 
+    public List<LivroDTO> getBooksByLeituraStatus(int leituraStatus) {
+		List<LivroDTO> dtos = new ArrayList<>();
+    	List<Livro> livros = this.repository.findByLeituraStatus(this.readStatusByInt(leituraStatus));
+    	livros.forEach(livro -> {
+    		LivroDTO dto = new LivroDTO();
+    		dto.setId(livro.getId());
+    		dto.setAutor(livro.getAutor());
+    		dto.setAvaliacao(livro.getAvaliacao());
+    		dto.setAvaliacaoMedia(livro.getAvaliacaoMedia());
+    		dto.setDataPublicacao(livro.getDataPublicacao());
+    		dto.setDescricao(livro.getDescricao());
+    		dto.setGoogleBooksApiId(livro.getGoogleBooksApiId());
+    		dto.setLeituraStatus(livro.getLeituraStatus());
+    		dto.setLinkImagem(livro.getLinkImagem());
+    		dtos.add(dto);
+		});
+    	return dtos;
+	}
+
+
     public Boolean postBook(LivroDTO dto) {
 		Livro livro = new Livro();
 		livro.setAutor(dto.getAutor());
