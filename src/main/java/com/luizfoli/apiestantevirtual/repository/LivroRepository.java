@@ -10,7 +10,8 @@ import com.luizfoli.apiestantevirtual.model.Livro;
 
 @Repository
 public interface LivroRepository extends CrudRepository<Livro, Long> {
-	
+
+	Livro findByGoogleBooksApiId(String googleBooksApiId);
 	List<Livro> findByLeituraStatus(LeituraStatus leituraStatus);
 	
 };
