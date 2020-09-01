@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/livro")
 public class LivroController {
 
-    private LivroRepository repository;
     private LivroService service;
 
-    public LivroController(LivroRepository repository, LivroService service) {
-        this.repository = repository;
+    public LivroController(LivroService service) {
         this.service = service;
     }
 
